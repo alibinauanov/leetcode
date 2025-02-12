@@ -8,7 +8,8 @@ class Solution(object):
         l, r = 0, 1
         while r < len(prices):
             if prices[r] > prices[l]:
-                profit += prices[r] - prices[l]
+                day_profit = prices[r] - prices[l]
+                profit += day_profit
             l = r
             r += 1
         return profit
