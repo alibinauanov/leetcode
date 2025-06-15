@@ -10,20 +10,10 @@ class Solution(object):
         :type root: Optional[TreeNode]
         :rtype: int
         """
-        def is_leaf(node):
-            return node.left is None and node.right is None
-        
-        def helper(node):
-            if not node:
-                return 0
-            if is_leaf(node):
-                return 1
-            else:
-                leftDepth = helper(node.left)
-                rightDepth = helper(node.right)
-                return max(leftDepth, rightDepth) + 1
-        
         if not root:
             return 0
-        else:
-            return helper(root)
+        
+        left = self.maxDepth(root.left)
+        right = self.maxDepth(root.right)
+
+        return 1 + max(left, right)
