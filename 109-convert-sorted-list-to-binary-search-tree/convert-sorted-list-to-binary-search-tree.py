@@ -22,8 +22,7 @@ class Solution(object):
             return TreeNode(head.val)
 
         prev = None
-        slow = head
-        fast = head
+        slow = fast = head
 
         while fast and fast.next:
             prev = slow
@@ -34,7 +33,7 @@ class Solution(object):
             prev.next = None
         
         root = TreeNode(slow.val)
-        root.left = self.sortedListToBST(head if head != slow else None)
+        root.left = self.sortedListToBST(head)
         root.right = self.sortedListToBST(slow.next)
         
         return root
