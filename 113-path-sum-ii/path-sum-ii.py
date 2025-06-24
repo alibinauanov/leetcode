@@ -11,11 +11,6 @@ class Solution(object):
         :type targetSum: int
         :rtype: List[List[int]]
         """
-        # 1 step: get the path that is equal to targetSum
-        # 2 step: store every value of node that is part of path,
-        #         it goes to array as a subarray
-        # 3 step: return array
-
         def helper(node, tempSum, path, res):
             if not node:
                 return
