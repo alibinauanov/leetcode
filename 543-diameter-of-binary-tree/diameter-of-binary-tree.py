@@ -15,7 +15,7 @@ class Solution(object):
         def dfs(root):
             if not root:
                 return 0
-            
+
             left = dfs(root.left)
             right = dfs(root.right)
 
