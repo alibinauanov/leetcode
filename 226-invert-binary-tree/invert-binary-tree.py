@@ -13,16 +13,8 @@ class Solution(object):
         if not root:
             return
         
-        def dfs(root):
-            if root.left:
-                dfs(root.left)
-            if root.right:
-                dfs(root.right)
-            if not root.left and not root.right:
-                return
-            
-            root.left, root.right = root.right, root.left
-            return
-        
-        dfs(root)
+        root.left, root.right = root.right, root.left
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+
         return root
