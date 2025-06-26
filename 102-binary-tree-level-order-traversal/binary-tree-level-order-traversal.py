@@ -7,27 +7,27 @@
 class Solution(object):
     def levelOrder(self, root):
         """
-        :type root: TreeNode
+        :type root: Optional[TreeNode]
         :rtype: List[List[int]]
         """
         if not root:
             return []
-        
-        queue = [root]
-        next_queue = []
-        level = []
-        result = []
 
-        while queue != []:
-            for root in queue:
-                level.append(root.val)
-                if root.left is not None:
-                    next_queue.append(root.left)
-                if root.right is not None:
-                    next_queue.append(root.right)
-            
-            result.append(level)
+        res = []
+        queue = [root]
+
+        while queue:
             level = []
-            queue = next_queue
-            next_queue = []
-        return result
+            size = len(queue)
+
+            for _ in range(size):
+                node = queue.pop(0)
+                level.append(node.val)
+
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            
+            res.append(level)
+        return res
