@@ -12,15 +12,15 @@ class Solution(object):
         """
         if not root:
             return []
-        
+
         res = []
-        queue = deque([root])
+        queue = [root]
 
         while queue:
-            levelSize = len(queue)
-            for i in range(levelSize):
-                node = queue.popleft()
-                if i == levelSize - 1:
+            size = len(queue)
+            for i in range(size):
+                node = queue.pop(0)
+                if i == size - 1:
                     res.append(node.val)
                 if node.left:
                     queue.append(node.left)
