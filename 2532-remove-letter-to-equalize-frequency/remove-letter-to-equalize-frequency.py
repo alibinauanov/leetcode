@@ -4,13 +4,15 @@ class Solution(object):
         :type word: str
         :rtype: bool
         """
-        hashTable = Counter(word)
-        for i in set(word):
-            hashTable[i] -= 1
-            if hashTable[i] == 0:
-                del hashTable[i]
-            vals = list(hashTable.values())
-            if len(set(vals)) == 1:
-                return True
-            hashTable[i] = hashTable.get(i, 0) + 1
+        freq = Counter(word)
+        cf = Counter(freq.values())
+
+        if len(cf) == 1:
+            (f, c) = next(iter(cf.items()))
+            return f == 1 or c == 1
+        
+        if len(cf) == 2:
+            (f1, c1), (f2, c2) = sorted(cf.items())
+            return (f1 == 1 and c1 == 1) or (f2 == f1 + 1 and c2 == 1)
+            
         return False
