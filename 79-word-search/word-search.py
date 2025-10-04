@@ -5,27 +5,26 @@ class Solution(object):
         :type word: str
         :rtype: bool
         """
-        rows, cols = len(board), len(board[0])
-        path = set()
-
-        def backtrack(r, c, i):
-            if i == len(word):
+        def backtrack(row, col, word):
+            if len(word) == 0:
                 return True
             
-            if (r < 0 or c < 0 or r >= rows or c >= cols or word[i] != board[r][c] or (r, c) in path):
+            if (row < 0 or rows == row or col < 0 or cols == col or board[row][col] != word[0]):
                 return False
             
-            path.add((r, c))
-            res = (backtrack(r + 1, c, i + 1) or
-                   backtrack(r - 1, c, i + 1) or
-                   backtrack(r, c + 1, i + 1) or
-                   backtrack(r, c - 1, i + 1))
-            path.remove((r, c))
+            board[row][col] = "#"
+            for rowOffset, colOffset in [(0,1),(-1,0),(0,-1),(1,0)]:
+                if backtrack(row + rowOffset, col + colOffset, word[1:]):
+                    return True
 
-            return res
-        
-        for r in range(rows):
-            for c in range(cols):
-                if backtrack(r, c, 0):
+            board[row][col] = word[0]
+            return False 
+
+        rows = len(board)
+        cols = len(board[0])
+
+        for row in range(rows):
+            for col in range(cols):
+                if backtrack(row, col, word):
                     return True
         return False
